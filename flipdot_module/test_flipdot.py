@@ -4,17 +4,8 @@
 
 import flipdot
 import time
+import random
 
 flipdot = flipdot.Flipdot('/dev/ttyUSB0',57600)
 
-state = True
-
-while True:
-
-  flipdot.display()
-
-  flipdot.reset(state)
-
-  state = not state
-
-  time.sleep(1)
+flipdot.randomfade(True)

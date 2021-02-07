@@ -14,6 +14,7 @@ from serial import (
     EIGHTBITS,
     STOPBITS_ONE,
 )
+import random
 
 class Flipdot:
 
@@ -88,6 +89,18 @@ class Flipdot:
 
     # Throw it all down the pipe
     self.serialPort.write(self.displaybytearray)
+
+  def randomfade(self,state) :
+    randomlist=[]
+
+    for x in range(self.displayHeight) :
+      for y in range(self.displayWidth) :
+        randomlist.append([x,y])
+    random.shuffle(randomlist)
+
+    for item in randomlist:
+      self.setdot(item[0],item[1],True)
+      self.display()
 
   # Debug routine to dump contents of internal display buffer to stdout
   def dumpdisplaybuffer(self):
