@@ -85,7 +85,7 @@ class Flipdot:
       #hexvalue = hex(int(binarystring, 2))
 
       # Debug
-      self.displaybytearray.append(0x02)
+      self.displaybytearray.append(0x01)
 
     # End of transmission byte
     self.displaybytearray.append(0x8F)
