@@ -50,15 +50,15 @@ class Flipdot:
 
   # Set dot at x,y
   def setdot(self,x,y,state):
-    displaybuffer[x][y] = state
+    self.displaybuffer[x][y] = state
 
   # Flip the dot at x,y. White becomes black, visa versa
   def reversedot(self,x,y):
-    displaybuffer[x][y] = not display[x][y]
+    self.displaybuffer[x][y] = not self.displaybuffer[x][y]
 
   # Set the whole buffer to On or Off
   def reset(self,state):
-    displaybuffer = [[state for x in range(width)] for y in range(height)]
+    self.displaybuffer = [[state for x in range(self.displayWidth)] for y in range(self.displayWidth)]
 
   # Dump the internal buffer to the display by converting it to bytearray and
   # then push it out the serial port
@@ -80,11 +80,8 @@ class Flipdot:
         else:
           binarystring = binarystring + '0'
 
-      # Translate binary to hex
-      hexvalue = hex(int(binarystring, 2))
-      print(hexvalue)
-      print(type(hexvalue))
-#      self.displaybytearray.append(hexvalue)
+      # Translate binary to integer value
+      self.displaybytearray.append(int(binarystring, 2))
 
     # End of transmission byte
     self.displaybytearray.append(0x8F)
