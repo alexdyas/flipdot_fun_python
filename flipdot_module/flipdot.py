@@ -8,7 +8,6 @@
 
 # Only handles a single 7x28 display as that's all I have at the moment
 
-
 import serial
 from serial import (
     PARITY_NONE,
@@ -82,10 +81,10 @@ class Flipdot:
           binarystring = binarystring + '0'
 
       # Translate binary to hex
-      #hexvalue = hex(int(binarystring, 2))
-
-      # Debug
-      self.displaybytearray.append(0x01)
+      hexvalue = hex(int(binarystring, 2))
+      print(hexvalue)
+      print(type(hexvalue))
+#      self.displaybytearray.append(hexvalue)
 
     # End of transmission byte
     self.displaybytearray.append(0x8F)
