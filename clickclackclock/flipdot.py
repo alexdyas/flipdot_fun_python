@@ -163,11 +163,15 @@ class Flipdot:
         else:
           binarystring = binarystring + '0'
 
+      print(binarystring)
+
       # Translate binary to integer value
-      self.displaybytearray.append(int(binarystring, 2))
+#      self.displaybytearray.append(int(binarystring, 2))
 
     # End of transmission byte
     self.displaybytearray.append(0x8F)
+
+    self.dumpdisplaybuffer()
 
     # Throw it all down the pipe
     self.serialPort.write(self.displaybytearray)
@@ -188,8 +192,7 @@ class Flipdot:
   def text_letter(self,letter,pos) :
     for x in range(len(self.char_1)):
       for y in range(len(self.char_1[x])) :
-
-
+        self.displaybuffer[x][y]=self.char_1[x][y]
         print(self.char_1[x][y],end='')
       print()
 
@@ -202,5 +205,8 @@ class Flipdot:
   def dumpdisplaybuffer(self):
     for y in range(self.displayHeight) :
       for x in range(self.displayWidth) :
-        print(self.displaybuffer[y][x],end='')
+        if self.displaybuffer[y][x] :
+          print(1,end='')
+        else :
+          print(0,end='')
       print()
