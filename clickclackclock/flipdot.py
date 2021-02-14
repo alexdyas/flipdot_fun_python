@@ -43,14 +43,27 @@ class Flipdot:
       0x8F #EOT
   ])
 
-  char_1 =  [ [0,0,1,0,0],
-              [0,1,1,0,0],
-              [1,0,1,0,0],
-              [0,0,1,0,0],
-              [0,0,1,0,0],
-              [0,0,1,0,0],
-              [1,1,1,1,1]
+  characters =  [ [ [0,0,1,0,0],
+                    [0,1,1,0,0],
+                    [1,0,1,0,0],
+                    [0,0,1,0,0],
+                    [0,0,1,0,0],
+                    [0,0,1,0,0],
+                    [1,1,1,1,1]
+                  ],
+
+  char_2 = {  {0,1,1,1,0},
+                    {1,0,0,0,1},
+                    {0,0,0,0,1},
+                    {0,0,1,1,0},
+                    {0,1,0,0,0},
+                    {1,0,0,0,0},
+                    {1,1,1,1,1} };
+
             ]
+
+
+
   # Letters
   letters = { 'A' : [0x7e,0x7f,0x09,0x09,0x7f,0x7e],
               'B' : [0x7f,0x7f,0x49,0x49,0x7f,0x36],
@@ -133,7 +146,7 @@ class Flipdot:
 
   # Set dot at x,y
   def setdot(self,x,y,state):
-    self.displaybuffer[x][y] = state
+    self.displaybuffer[y][x] = state
 
   # Flip the dot at x,y. White becomes black, visa versa
   def reversedot(self,x,y):
@@ -159,31 +172,25 @@ class Flipdot:
       binarystring = ''
       for y in range(self.displayHeight) :
         if self.displaybuffer[y][x] :
-          binarystring = binarystring + '1'
+          binarystring = '1' + binarystring
         else:
-          binarystring = binarystring + '0'
-
-      print(binarystring)
+          binarystring = '0' + binarystring
 
       # Translate binary to integer value
-#      self.displaybytearray.append(int(binarystring, 2))
+      self.displaybytearray.append(int(binarystring, 2))
 
     # End of transmission byte
     self.displaybytearray.append(0x8F)
-
-    self.dumpdisplaybuffer()
 
     # Throw it all down the pipe
     self.serialPort.write(self.displaybytearray)
 
   def randomfade(self,state) :
     randomlist=[]
-
     for x in range(self.displayHeight) :
       for y in range(self.displayWidth) :
         randomlist.append([x,y])
     random.shuffle(randomlist)
-
     for item in randomlist:
       self.setdot(item[0],item[1],True)
       self.display()
@@ -193,8 +200,6 @@ class Flipdot:
     for x in range(len(self.char_1)):
       for y in range(len(self.char_1[x])) :
         self.displaybuffer[x][y]=self.char_1[x][y]
-        print(self.char_1[x][y],end='')
-      print()
 
   # Shift whole display by amount. Positive shifts left to right, negative
   #  right to left. Wrap around.
