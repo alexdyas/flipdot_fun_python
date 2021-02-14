@@ -16,8 +16,3 @@ minute = now.strftime("%M")
 print("date and time ="+hour+":"+minute)
 
 flipdot.text_letter('1',0)
-flipdot.text_letter('2',7)
-flipdot.text_letter('3',14)
-flipdot.text_letter('4',21)
-
-flipdot.display_raw()

@@ -43,6 +43,14 @@ class Flipdot:
       0x8F #EOT
   ])
 
+  char_1 =  [ [0,0,1,0,0],
+              [0,1,1,0,0],
+              [1,0,1,0,0],
+              [0,0,1,0,0],
+              [0,0,1,0,0],
+              [0,0,1,0,0],
+              [1,1,1,1,1]
+            ]
   # Letters
   letters = { 'A' : [0x7e,0x7f,0x09,0x09,0x7f,0x7e],
               'B' : [0x7f,0x7f,0x49,0x49,0x7f,0x36],
@@ -164,9 +172,6 @@ class Flipdot:
     # Throw it all down the pipe
     self.serialPort.write(self.displaybytearray)
 
-  def display_raw(self):
-    self.serialPort.write(self.displaybytearray)
-
   def randomfade(self,state) :
     randomlist=[]
 
@@ -181,9 +186,12 @@ class Flipdot:
 
   # Print letter at pos
   def text_letter(self,letter,pos) :
-    for x in range(len(self.letters[letter])) :
-      print(self.letters[letter][x])
-      self.displaybytearray[x+pos+3] = self.letters[letter][x]
+    for x in range(len(self.char_1)):
+      for y in range(len(self.char_1[x])) :
+
+
+        print(self.char_1[x][y],end='')
+      print()
 
   # Shift whole display by amount. Positive shifts left to right, negative
   #  right to left. Wrap around.
