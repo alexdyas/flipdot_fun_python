@@ -8,4 +8,6 @@ import fonts
 
 thefonts = fonts.Fonts()
 
-thefonts.character("Somefont","A")
+character = thefonts.character("Somefont","1")
+
+print(character)
