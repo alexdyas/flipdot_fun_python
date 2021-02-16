@@ -9,17 +9,25 @@ import time
 flipdot = flipdot.Flipdot('/dev/ttyUSB0',57600)
 
 # datetime object containing current date and time
-now = datetime.now()
 
-# dd/mm/YY H:M:S
-hour = now.strftime("%H")
-minute = now.strftime("%M")
-print("date and time ="+hour+":"+minute)
 
-print(type(hour))
+while True :
+  now = datetime.now()
 
-flipdot.reset(False)
-for number in range(0,10) :
-  flipdot.text_letter(str(number),0)
-  time.sleep(1)
+  hour = now.strftime("%H")
+  minute = now.strftime("%M")
+
+  flipdot.text_letter(hour[0],0)
+  flipdot.text_letter(hour[1],6)
+  flipdot.text_letter(minute[0],12)
+  flipdot.text_letter(minute[1],18)
   flipdot.display()
+  time.sleep(1)
+
+
+
+#flipdot.reset(False)
+#for number in range(0,10) :
+#  flipdot.text_letter(str(number),0)
+#  time.sleep(1)
+#  flipdot.display()

@@ -115,9 +115,9 @@ class Flipdot:
   # Print letter at pos
   def text_letter(self,letter,pos) :
     character = self.thefonts.character("simple",letter)
-    for x in range(len(character)):
-      for y in range(len(character[x])) :
-        self.displaybuffer[x][y]=character[x][y]
+    for y in range(len(character)):
+      for x in range(len(character[y])) :
+        self.displaybuffer[y][x+pos]=character[y][x]
 
   # Shift whole display by amount. Positive shifts left to right, negative
   #  right to left. Wrap around.

@@ -93,8 +93,8 @@ class Fonts :
 
 
 
-  def __init__(self):
-    print("Init")
+#  def __init__(self):
+#    print("Init")
 
   def character(self,font,character):
     return self.simple[character]
