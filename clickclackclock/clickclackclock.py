@@ -16,6 +16,8 @@ hour = now.strftime("%H")
 minute = now.strftime("%M")
 print("date and time ="+hour+":"+minute)
 
+print(type(hour))
+
 flipdot.reset(False)
 for number in range(0,10) :
   flipdot.text_letter(str(number),0)
