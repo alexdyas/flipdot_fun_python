@@ -10,6 +10,8 @@ flipdot = flipdot.Flipdot('/dev/ttyUSB0',57600)
 
 # datetime object containing current date and time
 
+#flipdot.reset(False)
+#flipdot.display()
 
 while True :
   now = datetime.now()
@@ -17,10 +19,13 @@ while True :
   hour = now.strftime("%H")
   minute = now.strftime("%M")
 
-  flipdot.text_letter(hour[0],0)
-  flipdot.text_letter(hour[1],6)
-  flipdot.text_letter(minute[0],12)
-  flipdot.text_letter(minute[1],18)
+  flipdot.text_letter("setno1",hour[0],0)
+  flipdot.text_letter("setno1",hour[1],7)
+  flipdot.text_letter("setno1",minute[0],15)
+  flipdot.text_letter("setno1",minute[1],22)
+
+  # !! Only send if time has changed
+
   flipdot.display()
   time.sleep(1)
 

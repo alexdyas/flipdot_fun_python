@@ -113,8 +113,8 @@ class Flipdot:
       self.display()
 
   # Print letter at pos
-  def text_letter(self,letter,pos) :
-    character = self.thefonts.character("simple",letter)
+  def text_letter(self,font,letter,pos) :
+    character = self.thefonts.character(font,letter)
     for y in range(len(character)):
       for x in range(len(character[y])) :
         self.displaybuffer[y][x+pos]=character[y][x]
