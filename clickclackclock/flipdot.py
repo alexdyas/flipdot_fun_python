@@ -119,6 +119,16 @@ class Flipdot:
       for x in range(len(character[y])) :
         self.displaybuffer[y][x+pos]=character[y][x]
 
+  # Scroll message from right to left
+  def message(self,font,message) :
+
+    # Construct 'array' of letters
+    messagebuffer = []
+    for letter in message :
+      messagebuffer.append(self.thefonts.character(font,letter)
+
+    print(messagebuffer)
+
   # Shift whole display by amount. Positive shifts left to right, negative
   #  right to left. Wrap around.
   def shift(self,amount) :
