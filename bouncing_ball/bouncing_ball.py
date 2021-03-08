@@ -20,7 +20,7 @@ import sys
 import time
 
 # Prepare the serial port
-serialPort = serial.Serial('/dev/ttyUSB0')
+serialPort = serial.Serial('/dev/cu.usbserial-0001')
 serialPort.baudrate = 57600
 serialPort.parity = PARITY_NONE
 serialPort.bytesize = EIGHTBITS
@@ -56,12 +56,8 @@ display_array = bytearray([
 
 ball_position = 0
 
-print(display_array)
-
 # Infinite loop
 while True:
-
-  print("One time around")
 
   # Make all the columns before the ball black
   for count in range(1,xpos,1) :
@@ -84,16 +80,11 @@ while True:
     ball_position = 0x40
   else :
     print("Got an unsupported xpos, plodding on regardless")
-  print(ypos)
   display_array[xpos+2] = ball_position
 
   # Make all the columns after the ball black
   for count in range(xpos+1,28,1) :
-    print("Xpos"+str(count))
-    print("Count"+str(count))
     display_array[count+3]= 0x00
-
-  print(display_array)
 
   # Write array to serial port
   serialPort.write(display_array)
@@ -113,4 +104,4 @@ while True:
   ypos = ypos + ydirection
 
   # Don't go too fast
-  time.sleep(1)
+  time.sleep(.2)
