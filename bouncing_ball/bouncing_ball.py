@@ -9,6 +9,8 @@
 #
 # Author        - Alexander Dyas
 #
+# ToDo          - Fix bug double ball on return
+#
 # ------------------------------------------------------------------------------
 import serial
 from serial import (
@@ -26,7 +28,6 @@ serialPort.parity = PARITY_NONE
 serialPort.bytesize = EIGHTBITS
 serialPort.stopbits = STOPBITS_ONE
 if serialPort.isOpen() :
-  print("Port was open, reopening")
   serialPort.close()
 serialPort.open()
 
@@ -47,10 +48,10 @@ display_array = bytearray([
     0x80,  # header
     0x83,  # 28 bytes refresh
     0xFF,  # display address, FF == all displays
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  # 28 bytes data
+    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  # 28 bytes data
     0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x8F #EOT
 ])
 
